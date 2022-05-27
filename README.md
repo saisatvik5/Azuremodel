@@ -2,9 +2,9 @@
 ### Complete Integration and Complete Deployment (Ci/Cd)
 
 <p align="center">
-  <img src="docs/images/aml.svg" height="80"/>
+  <img src="images/aml.svg" height="80"/>
   <img src="https://i.ya-webdesign.com/images/a-plus-png-2.png" alt="plus" height="40"/>
-  <img src="docs/images/actions.png" alt="Azure Machine Learning + Actions" height="80"/>
+  <img src="images/actions.png" alt="Azure Machine Learning + Actions" height="80"/>
 </p>
 
 Here we are trying to deploy the Machine Learning model from GitHub without accessing the Azure for deployment.
@@ -56,7 +56,7 @@ This will generate the following JSON output:
 Add this JSON output as [a secret](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets) with the name `AZURE_CREDENTIALS` in your GitHub repository:
 
 <p align="center">
-  <img src="docs/images/secrets.png" alt="GitHub Template repository" width="700"/>
+  <img src="images/secrets.png" alt="GitHub Template repository" width="700"/>
 </p>
 
 To do so, click on the Settings tab in your repository, then click on Secrets and finally add the new secret with the name `AZURE_CREDENTIALS` to your repository.
@@ -72,6 +72,6 @@ Please use the same value for the `resource_group` parameter that you have used 
 Once you save your changes to the file, the predefined GitHub workflow that trains and deploys a model on Azure Machine Learning gets triggered. Check the actions tab to view if your actions have successfully run.
 
 <p align="center">
-  <img src="docs/images/actions_tab.png" alt="GitHub Actions Tab" width="700"/>
+  <img src="images/actions_tab.png" alt="GitHub Actions Tab" width="700"/>
 </p>
 
