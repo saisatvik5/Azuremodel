@@ -1,0 +1,45 @@
+# Actions train a model on Azure Machine Learning
+name: aml-train-deploy-workflow
+
+on:
+  push:
+    branches:
+      - master
+    # paths:
+    #   - 'code/*'
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    steps:
+     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Check Out Repository
+      id: checkout_repository
+      uses: actions/checkout@v2
+
+    # AML Workspace Action
+    - uses: Azure/aml-workspace
+      id: aml_workspace
+      with:
+        azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+    # AML Register Model Action
+    - uses: Azure/aml-registermodel@v1
+      id: aml_registermodel
+      with:
+        # required inputs
+        azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+       
+        # optional inputs
+        parameters_file: "registermodel.json"
+        
+      # Deploy model in Azure Machine Learning to ACI
+    - name: Deploy model
+      id: aml_deploy
+      uses: Azure/aml-deploy@v1
+      with:
+        # required inputs
+        azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+        model_name:  ${{ steps.aml_registermodel.outputs.model_name }}
+        model_version: ${{ steps.aml_registermodel.outputs.model_version }}
+        # optional inputs
+        parameters_file: "deploy.json"
